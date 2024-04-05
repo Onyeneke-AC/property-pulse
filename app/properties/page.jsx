@@ -1,24 +1,32 @@
+'use client'
+import { useEffect, useState } from 'react';
 import PropertyCard from '@/components/PropertyCard';
-
-async function fetchProperties(){
-  try {
-    // const res = await fetch(`${process.env.NEXT_PUBLIC_API_DOMAIN}/properties`);
-
-    const res = await fetch("http://localhost:3000/api/properties");
-
-    if (!res.ok) {
-      throw new Error('Failed to fetch data');
-    }
-
-    return res.json();
-    
-  } catch(err) {
-    console.log(err);
-  }
-}
+import { fetchProperties } from '@/utils/requests';
 
 export default async function PropertiesPage() {
-  const properties = await fetchProperties();
+  // const properties = await fetchProperties();
+  const  [properties, setProperties] = useState([]);
+
+  useEffect(() => {
+    const fetchProperties = async () => {
+      try {
+        const res = await fetch("http://localhost:3000/api/properties");
+
+        if (!res.ok) {
+          throw new Error('Failed to fetch data');
+        }
+
+        const data = await res.json();
+        setProperties(data);
+      } catch(err) {
+        console.log(err);
+      }
+    };
+
+    fetchProperties();
+  }, []);
+
+  console.log(properties);
 
   properties.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 
