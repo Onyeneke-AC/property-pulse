@@ -1,5 +1,5 @@
 'use client';
-import useFetchProperties from '@/utils/requests';
+import { useFetchProperties } from '@/utils/requests';
 import PropertyCard from './PropertyCard';
 import Link from 'next/link';
 
