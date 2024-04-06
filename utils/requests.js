@@ -37,7 +37,7 @@ export const useFetchProperties = () => {
 
     fetchProperties();
   }, []);
-  return properties;
+  return {properties, loading};
 };
 
 // Fetch a single property
