@@ -2,15 +2,19 @@
 import { useFetchProperties } from '@/utils/requests';
 import PropertyCard from './PropertyCard';
 import Link from 'next/link';
+import Spinner from './Spinner';
 
 const HomeProperties = () => {
-    const properties = useFetchProperties();
+    const { properties, loading } = useFetchProperties();
 
     const recentProperties = properties
         .sort(() => Math.random() - Math.random())
         .slice(0, 3);
 
   return (
+    <>
+    {loading && <Spinner loading={loading} />}
+    {!loading && recentProperties && (
     <>
     <section className="px-4 py-6">
         <div className="container-xl lg:container m-auto">
@@ -34,6 +38,8 @@ const HomeProperties = () => {
         className="block bg-black text-white text-center py-4 px-6 rounded-xl hover:bg-gray-700"
         >View All Properties</Link>
     </section>
+    </>
+    )}
     </>
         
   )
