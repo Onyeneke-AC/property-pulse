@@ -1,32 +1,10 @@
-'use client'
-import { useEffect, useState } from 'react';
+'use client';
 import PropertyCard from '@/components/PropertyCard';
-import { fetchProperties } from '@/utils/requests';
+import useFetchProperties from '@/utils/requests';
 
-export default async function PropertiesPage() {
-  // const properties = await fetchProperties();
-  const  [properties, setProperties] = useState([]);
-
-  useEffect(() => {
-    const fetchProperties = async () => {
-      try {
-        const res = await fetch("http://localhost:3000/api/properties");
-
-        if (!res.ok) {
-          throw new Error('Failed to fetch data');
-        }
-
-        const data = await res.json();
-        setProperties(data);
-      } catch(err) {
-        console.log(err);
-      }
-    };
-
-    fetchProperties();
-  }, []);
-
-  console.log(properties);
+export default function PropertiesPage() {
+  
+  const properties = useFetchProperties();
 
   properties.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
 

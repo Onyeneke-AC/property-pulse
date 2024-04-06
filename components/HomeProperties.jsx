@@ -1,9 +1,10 @@
+'use client';
+import useFetchProperties from '@/utils/requests';
 import PropertyCard from './PropertyCard';
 import Link from 'next/link';
-import { fetchProperties } from '@/utils/requests';
 
-const HomeProperties = async () => {
-    const properties = await fetchProperties();
+const HomeProperties = () => {
+    const properties = useFetchProperties();
 
     const recentProperties = properties
         .sort(() => Math.random() - Math.random())
