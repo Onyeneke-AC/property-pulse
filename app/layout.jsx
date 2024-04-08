@@ -21,6 +21,7 @@ const MainLayout = ({ children }) => {
                   { children }
               </main>
               <Footer />
+              <ToastContainer />
           </body>
       </html>
     </AuthProvider>
