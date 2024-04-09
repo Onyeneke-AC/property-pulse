@@ -23,6 +23,7 @@ export const POST = async (request) => {
 
         // Find user in the database
         const user = await User.findOne({ _id: userId });
+        // console.log(user)
 
         // check if property is bookmarked
         let isBookmarked = user.bookmarks.includes(propertyId);
@@ -32,14 +33,17 @@ export const POST = async (request) => {
         if (isBookmarked) {
             // if already bookmarked, remove it
             user.bookmarks.pull(propertyId);
+            // console.log(user.bookmarks);
             message = 'Bookmark removed successfully';
             isBookmarked= false;
         } else {
             // if not bookmarked
             user.bookmarks.push(propertyId);
-            message = 'Bookmark removed successfully';
+            message = 'Bookmark added successfully';
             isBookmarked= true;
         }
+
+        // console.log(user.bookmarks);
 
         await user.save();
 
