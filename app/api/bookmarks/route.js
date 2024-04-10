@@ -5,6 +5,40 @@ import { getSessionUser } from "@/utils/getSessionUser";
 
 export const dynamic = 'force-dynamic';
 
+// GET /api/bookmarks
+export const GET = async () => {
+    try {
+        await connectDB();
+
+        const sessionUser = await getSessionUser();
+
+        if (!sessionUser || !sessionUser.userId) {
+            return new Response('User ID is required', {
+                status: 401,
+            });
+        }
+
+        const { userId } = sessionUser;
+
+        // Find user in the database
+        const user = await User.findOne({ _id: userId });
+        
+        // Get users bookmarks
+        const bookmarks = await Property.find({_id: {$in: user.bookmarks}})
+
+        return new Response(JSON.stringify(bookmarks),{
+            status: 200,
+        })
+
+    } catch (err) {
+        console.log(err);
+        return new Response('Something went wrong', {
+            staus: 500,
+        })
+    }
+}
+
+// POST /api/bookmarks
 export const POST = async (request) => {
     try {
         await connectDB();
@@ -23,7 +57,6 @@ export const POST = async (request) => {
 
         // Find user in the database
         const user = await User.findOne({ _id: userId });
-        // console.log(user)
 
         // check if property is bookmarked
         let isBookmarked = user.bookmarks.includes(propertyId);
@@ -33,7 +66,6 @@ export const POST = async (request) => {
         if (isBookmarked) {
             // if already bookmarked, remove it
             user.bookmarks.pull(propertyId);
-            // console.log(user.bookmarks);
             message = 'Bookmark removed successfully';
             isBookmarked= false;
         } else {
@@ -42,8 +74,6 @@ export const POST = async (request) => {
             message = 'Bookmark added successfully';
             isBookmarked= true;
         }
-
-        // console.log(user.bookmarks);
 
         await user.save();
 

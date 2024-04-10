@@ -30,8 +30,6 @@ const BookmarkButton = ({ property }) => {
           })
       });
 
-      console.log(res.status)
-
       if (res.status === 200){
         const data = await res.json();
         setIsBookmarked(data.isBookmarked);
@@ -62,8 +60,6 @@ const BookmarkButton = ({ property }) => {
             propertyId: property._id,
           })
       });
-
-      console.log(res.status)
 
       if (res.status === 200){
         const data = await res.json();
