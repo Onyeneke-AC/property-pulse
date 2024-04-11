@@ -3,6 +3,7 @@ import Footer from '@/components/Footer';
 import AuthProvider from '@/components/AuthProvider';
 import { ToastContainer } from 'react-toastify';
 import '@/assets/styles/globals.css';
+import { GlobalProvider } from '@/context/GlobalContext';
 import 'react-toastify/dist/ReactToastify.css'
 
 export const metadata = {
@@ -13,6 +14,7 @@ export const metadata = {
 
 const MainLayout = ({ children }) => {
   return (
+    <GlobalProvider>  
     <AuthProvider>
       <html lang='en'>
           <body>
@@ -25,6 +27,7 @@ const MainLayout = ({ children }) => {
           </body>
       </html>
     </AuthProvider>
+    </GlobalProvider>
   )
 }
 
