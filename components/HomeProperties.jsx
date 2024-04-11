@@ -5,16 +5,13 @@ import Link from 'next/link';
 import Spinner from './Spinner';
 
 const HomeProperties = () => {
-    const { properties, loading } = useFetchProperties();
+    const data  = useFetchProperties();
 
-    const recentProperties = properties
+    const recentProperties = data
         .sort(() => Math.random() - Math.random())
         .slice(0, 3);
 
   return (
-    <>
-    {loading && <Spinner loading={loading} />}
-    {!loading && recentProperties && (
     <>
     <section className="px-4 py-6">
         <div className="container-xl lg:container m-auto">
@@ -39,10 +36,7 @@ const HomeProperties = () => {
         >View All Properties</Link>
     </section>
     </>
-    )}
-    </>
-        
-  )
+    )
 }
 
 export default HomeProperties

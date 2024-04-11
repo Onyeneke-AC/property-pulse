@@ -6,8 +6,7 @@ const apiDomain = process.env.NEXT_PUBLIC_API_DOMAIN || null;
 // Fetch all properties
 export const useFetchProperties = () => {
 
-  const [properties, setProperties] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [mine, setMine] = useState([]);
 
   useEffect(() => {
     const fetchProperties = async () => {
@@ -25,19 +24,17 @@ export const useFetchProperties = () => {
         }
 
         const data = await res.json();
+        console.log(data);
 
-        setProperties(data);   
+        setMine(data);   
       } catch(err) {
         console.log(err);
         return [];
-      } finally {
-        setLoading(false);
       }
     };
-
     fetchProperties();
   }, []);
-  return {properties, loading};
+  return mine.properties || [];
 };
 
 // Fetch a single property
