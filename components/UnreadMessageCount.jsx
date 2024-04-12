@@ -1,8 +1,9 @@
 'use client';
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useGlobalContext } from "@/context/GlobalContext";
 
 const UnreadMessageCount = ({ session }) => {
+    // here changed from the use of useState to context for the mark as read notification count
     const {unreadCount, setUnreadCount} = useGlobalContext();
 
     useEffect(() => {
