@@ -5,7 +5,7 @@ import Map, { Marker } from 'react-map-gl';
 import { setDefaults, fromAddress } from "react-geocode";
 import Spinner from "@/components/Spinner";
 import Image from "next/image";
-import pin from '@/assets/images/pin.svg'
+import pin from '@/assets/images/pin.svg';
 
 const PropertyMap = ({ property }) => {
     const [lat, setLat] = useState(null);
