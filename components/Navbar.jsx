@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import profileDefault from '@/assets/images/profile.png';
 import { FaGoogle } from 'react-icons/fa';
 import { useEffect, useState } from "react";
-import { signIn, signOut, useSession, getProviders } from 'next-auth/react'
+import { signIn, signOut, useSession, getProviders } from 'next-auth/react';
 import UnreadMessageCount from "./UnreadMessageCount";
 
 
